@@ -123,7 +123,7 @@ gulp.task('clean', function() {
 });
 
 // Starts a simple static file server that transpiles ES6 on the fly to ES5
-gulp.task('serve:src', function() {
+gulp.task('serve:src', ['sass:watch'], function() {
     return connect.server({
         root: transpilationConfig.root,
         middleware: function(connect, opt) {
@@ -137,6 +137,7 @@ gulp.task('serve:src', function() {
                             res.setHeader('Content-Type', 'application/javascript');
                             res.end(result.code);
                         } else {
+                            console.log("NO BABLE");
                             next();
                         }
                      });
@@ -159,7 +160,7 @@ function babelTranspile(pathname, callback) {
     babelCore.transformFile(src, opts, callback);
 }
 
-gulp.task('default', ['html', 'js', 'css'], function(callback) {
+gulp.task('default', ['sass', 'html', 'js', 'css'], function(callback) {
     callback();
     console.log('\nPlaced optimized files in ' + chalk.magenta('dist/\n'));
 });

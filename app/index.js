@@ -27,14 +27,6 @@ var KosGenerator = yeoman.generators.Base.extend( {
 
                     this.installDependencies();
 
-                    if ( this.includeTests ) {
-                        // Install test dependencies too
-                        var bowerArgs = ['install'];
-                        if ( isOffline ) {
-                            bowerArgs.push( '--offline' );
-                        }
-                        this.spawnCommand( 'bower', bowerArgs, {cwd: 'test'} );
-                    }
                 }.bind( this ) );
             }
         } );
@@ -49,17 +41,11 @@ var KosGenerator = yeoman.generators.Base.extend( {
             name: 'name',
             message: 'What\'s the name of your new site?',
             default: path.basename( process.cwd() )
-        }, {
-            type: 'confirm',
-            name: 'includeTests',
-            message: 'Do you want to include automated tests, using Jasmine and Karma?',
-            default: false
         }];
 
         this.prompt( prompts, function ( props ) {
             this.longName = props.name;
             this.slugName = this._.slugify( this.longName );
-            this.includeTests = props.includeTests;
             done();
         }.bind( this ) );
     },
@@ -73,13 +59,6 @@ var KosGenerator = yeoman.generators.Base.extend( {
         this.directory('sass','sass');
         this.copy( 'bowerrc', '.bowerrc' );
         this.copy( 'jsconfig.json' );
-
-        if ( this.includeTests ) {
-            // Set up tests
-            this._processDirectory( 'test', 'test' );
-            this.copy( 'bowerrc_test', 'test/.bowerrc' );
-            this.copy( 'karma.conf.js' );
-        }
     },
 
     _processDirectory: function ( source, destination ) {

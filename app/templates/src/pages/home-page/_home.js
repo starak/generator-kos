@@ -9,6 +9,10 @@ class HomeViewModel {
     doSomething() {
         this.message('You invoked doSomething() on the viewmodel.');
     }
+
+    doSomethingElse() {
+        this.message('You invoked doSomethingElse() on the viewmodel.');
+    }
 }
 
 export default { viewModel: HomeViewModel, template: homeTemplate };

@@ -1,0 +1,29 @@
+// Fix the lack of button-primary variables
+body {
+    .button,
+    button,
+    input[type="submit"],
+    input[type="reset"],
+    input[type="button"] {
+        &:hover,
+        &:focus {
+            color: #333;
+            border-color: #888;
+            outline: 0;
+        }
+        &.button-primary {
+            color: #FFF;
+            background-color: $button-primary-color;
+            border-color: $button-primary-color;
+            &:hover,
+            &:focus {
+                color: #FFF;
+                background-color: lighten($button-primary-color, 20%);
+                border-color: $button-primary-color;
+            }
+        }
+    }
+    .button:visited {
+        color: $button-color;
+    }
+}

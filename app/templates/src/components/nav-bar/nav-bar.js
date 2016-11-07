@@ -1,4 +1,3 @@
-import ko from 'knockout';
 import template from 'text!./nav-bar.html';
 
 class NavBarViewModel {

@@ -1,0 +1,18 @@
+
+$link-color: #FF0000; // default link color
+$link-hover: #FFFF00; // default link color on :hover
+$link-decoration: underline; // default link decoration
+
+$button-color: #555;
+$button-weight: 600;
+$button-font-uppercase: true;
+$button-border-color: #bbb;
+
+$button-primary-color: $link-color;
+$button-primary-border-color: $link-color;
+
+// GRID CHANGES
+$grid-max-width: 960px;
+$base-col-count: 12;
+$base-col-width: 60px;
+$use-new-grid: true;

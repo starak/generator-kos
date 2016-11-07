@@ -1,10 +1,26 @@
 // Node modules
-var fs = require('fs'), vm = require('vm'), merge = require('deeply'), chalk = require('chalk'), es = require('event-stream'), path = require('path'), url = require('url');
+var fs = require('fs'),
+    vm = require('vm'),
+    merge = require('deeply'),
+    chalk = require('chalk'),
+    es = require('event-stream'),
+    path = require('path'),
+    url = require('url');
 
 // Gulp and plugins
-var gulp = require('gulp'), rjs = require('gulp-requirejs-bundler'), concat = require('gulp-concat'), clean = require('gulp-clean'), filter = require('gulp-filter'),
-    replace = require('gulp-replace'), uglify = require('gulp-uglify'), htmlreplace = require('gulp-html-replace'),
-    connect = require('gulp-connect'), babelCore = require('babel-core'), babel = require('gulp-babel'), objectAssign = require('object-assign');
+var gulp = require('gulp'),
+    rjs = require('gulp-requirejs-bundler'),
+    concat = require('gulp-concat'),
+    clean = require('gulp-clean'),
+    filter = require('gulp-filter'),
+    replace = require('gulp-replace'),
+    uglify = require('gulp-uglify'),
+    htmlreplace = require('gulp-html-replace'),
+    connect = require('gulp-connect'),
+    babelCore = require('babel-core'),
+    babel = require('gulp-babel'),
+    objectAssign = require('object-assign'),
+    sass = require('gulp-sass');
 
 // Config
 var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require.config.js') + '; require;'),
@@ -18,8 +34,8 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
         include: [
             'requireLib',
             'components/nav-bar/nav-bar',
-            'components/home-page/home',
-            'text!components/about-page/about.html'
+            'pages/home-page/home',
+            'text!pages/about-page/about.html'
         ],
         insertRequire: ['app/startup'],
         bundles: {
@@ -65,7 +81,7 @@ gulp.task('js:optimize', ['js:babel'], function() {
     return rjs(config)
         .pipe(uglify({ preserveComments: 'some' }))
         .pipe(gulp.dest('./dist/'));    
-})
+});
 
 // Builds the distributable .js files by calling Babel then the r.js optimizer
 gulp.task('js', ['js:optimize'], function () {
@@ -73,15 +89,21 @@ gulp.task('js', ['js:optimize'], function () {
     return gulp.src('./temp', { read: false }).pipe(clean());
 });
 
+gulp.task('sass', function () {
+    return gulp.src('./sass/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./src/css'));
+});
+
+gulp.task('sass:watch', function () {
+    gulp.watch('./sass/**/*.scss', ['sass']);
+});
+
 // Concatenates CSS files, rewrites relative paths to Bootstrap fonts, copies Bootstrap fonts
 gulp.task('css', function () {
-    var bowerCss = gulp.src('src/bower_modules/components-bootstrap/css/bootstrap.min.css')
-            .pipe(replace(/url\((')?\.\.\/fonts\//g, 'url($1fonts/')),
-        appCss = gulp.src('src/css/*.css'),
-        combinedCss = es.concat(bowerCss, appCss).pipe(concat('css.css')),
-        fontFiles = gulp.src('./src/bower_modules/components-bootstrap/fonts/*', { base: './src/bower_modules/components-bootstrap/' });
-    return es.concat(combinedCss, fontFiles)
-        .pipe(gulp.dest('./dist/'));
+    var appCss = gulp.src('src/css/*.css'),
+        combinedCss = es.concat(appCss).pipe(concat('css.css'));
+    return combinedCss.pipe(gulp.dest('./dist/'));
 });
 
 // Copies index.html, replacing <script> and <link> tags to reference production URLs

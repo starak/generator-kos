@@ -1,14 +1,14 @@
 {
-  "name": "generator-ko",
+  "name": "generator-kos",
   "version": "0.2.0",
-  "description": "Yeoman generator",
+  "description": "Yeoman generator for Knockout with Skeleton",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "SteveSanderson/generator-ko",
+  "repository": "starak/generator-kos",
   "author": {
-    "name": "Steven Sanderson",
+    "name": "Ståle Raknes",
     "email": "",
-    "url": "https://github.com/SteveSanderson"
+    "url": "https://github.com/starak"
   },
   "engines": {
     "node": ">=0.10.0"

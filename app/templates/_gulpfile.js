@@ -45,6 +45,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             // 'another-bundle-name': [ 'yet-another-module' ]
         }
     }),
+
     transpilationConfig = {
         root: 'src',
         skip: ['bower_modules/**', 'app/require.config.js'],
@@ -53,6 +54,7 @@ var requireJsRuntimeConfig = vm.runInNewContext(fs.readFileSync('src/app/require
             sourceMaps: 'inline'
         }
     },
+
     babelIgnoreRegexes = transpilationConfig.skip.map(function(item) {
         return babelCore.util.regexify(item);
     });
@@ -125,8 +127,8 @@ gulp.task('clean', function() {
 // Starts a simple static file server that transpiles ES6 on the fly to ES5
 gulp.task('serve:src', ['sass:watch'], function() {
     return connect.server({
-        root: transpilationConfig.root,
-        middleware: function(connect, opt) {
+        "root": transpilationConfig.root,
+        "middleware": function() {
             return [
                  function (req, res, next) {                     
                      var pathname = path.normalize(url.parse(req.url).pathname);
@@ -137,7 +139,6 @@ gulp.task('serve:src', ['sass:watch'], function() {
                             res.setHeader('Content-Type', 'application/javascript');
                             res.end(result.code);
                         } else {
-                            console.log("NO BABLE");
                             next();
                         }
                      });

@@ -1,13 +1,50 @@
-@import "../src/bower_modules/normalize-scss/sass/normalize/import-now"; // import normalize-scss
-@import "../src/bower_modules/skeleton-sass/skeleton/core/config"; // Skeleton Sass core loader
+@import "app_import";
 
-// import default theme variables
-@import "../src/bower_modules/skeleton-sass/skeleton/themes/fresh/vars"; // theme variable overrides
+body{
+    padding:80px 20px 20px;
 
-// import custom theme variables
-@import "vars";
+    .navbar{
 
-// import default theme styles
-@import "../src/bower_modules/skeleton-sass/skeleton/themes/fresh/base"; // theme base styles
-@import "../src/bower_modules/skeleton-sass/skeleton/themes/fresh/skeleton"; // theme grid styles
-@import "skeleton_fix";
+        background-color: $button-primary-color;
+        color: #fff;
+        z-index: 10;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        padding: 0 20px;
+
+        .navbar-collapse{
+            display: inline-block;
+        }
+
+        ul{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            li{
+                margin: 0;
+            }
+        }
+
+        .navbar-header,
+        li{
+            display: inline-block;
+            a {
+                display: block;
+                padding: 10px;
+            }
+            &.active{
+                background-color: rgba(255,255,255,0.3);
+            }
+        }
+
+        a{
+            color: #fff;
+        }
+
+        &.navbar-fixed-top{
+            position: fixed;
+            top: 0;
+            left:0;
+            width: 100%;
+        }
+    }
+}

@@ -14,7 +14,7 @@ var PageGenerator = yeoman.generators.NamedBase.extend({
         var codeLanguage = 'JavaScript';
         console.log('Creating page \'' + this.name + '\' (' + codeLanguage + ')...');
         this.componentName = this.name;
-        this.dirname = 'src/pages/' + this._.dasherize(this.name) + '/';
+        this.dirname = 'src/pages/' + this._.dasherize(this.name) + '-page/';
         this.filename = this._.dasherize(this.name);
         //
         this.viewModelClassName = this._.classify(this.name);
@@ -29,7 +29,7 @@ var PageGenerator = yeoman.generators.NamedBase.extend({
     addComponentRegistration: function() {
         var startupFile = 'src/app/startup' + this.codeFileExtension;
         readIfFileExists.call(this, startupFile, function(existingContents) {
-            var existingRegistrationRegex = new RegExp('\\bko\\.components\\.register\\(\s*[\'"]' + this.filename + '[\'"]');
+            var existingRegistrationRegex = new RegExp('\\bko\\.components\\.register\\(\s*[\'"]' + this.filename + '-page[\'"]');
             if (existingRegistrationRegex.exec(existingContents)) {
                 this.log(chalk.white(this.filename) + chalk.cyan(' is already registered in ') + chalk.white(startupFile));
                 return;
@@ -37,8 +37,8 @@ var PageGenerator = yeoman.generators.NamedBase.extend({
 
             var token = '// [Scaffolded component registrations will be inserted here. To retain this feature, don\'t remove this comment.]',
                 regex = new RegExp('^(\\s*)(' + token.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&') + ')', 'm'),
-                modulePath = 'pages/' + this.filename + '/' + this.filename,
-                lineToAdd = 'ko.components.register(\'' + this.filename + '\', { require: \'' + modulePath + '\' });',
+                modulePath = 'pages/' + this.filename + '-page/' + this.filename,
+                lineToAdd = 'ko.components.register(\'' + this.filename + '-page\', { require: \'' + modulePath + '\' });',
                 newContents = existingContents.replace(regex, '$1' + lineToAdd + '\n$&');
             fs.writeFile(startupFile, newContents);
             this.log(chalk.green('   registered ') + chalk.white(this.filename) + chalk.green(' in ') + chalk.white(startupFile));

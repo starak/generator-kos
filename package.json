@@ -1,29 +1,29 @@
 {
-  "name": "generator-kos",
-  "version": "0.2.0",
-  "description": "Yeoman generator for Knockout with Skeleton-scss",
-  "license": "MIT",
-  "main": "app/index.js",
-  "repository": "starak/generator-kos",
-  "author": {
-    "name": "Ståle Raknes",
-    "email": "",
-    "url": "https://github.com/starak"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "files": [
-    "app",
-    "component",
-    "page",
-    "staticpage"
-  ],
-  "keywords": [
-    "yeoman-generator"
-  ],
-  "dependencies": {
-    "yeoman-generator": "~0.16.0",
-    "chalk": "~0.4.0"
-  }
+    "name": "generator-kos",
+    "version": "0.2.0",
+    "description": "Yeoman generator for Knockout with Skeleton-scss",
+    "license": "MIT",
+    "main": "app/index.js",
+    "repository": "starak/generator-kos",
+    "author": {
+        "name": "Ståle Raknes",
+        "email": "",
+        "url": "https://github.com/starak"
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "files": [
+        "app",
+        "component",
+        "page",
+        "staticpage"
+    ],
+    "keywords": [
+        "yeoman-generator"
+    ],
+    "dependencies": {
+        "yeoman-generator": "~0.16.0",
+        "chalk": "~0.4.0"
+    }
 }

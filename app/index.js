@@ -56,7 +56,7 @@ var KosGenerator = yeoman.generators.Base.extend( {
         this.template( '_bower.json', 'bower.json' );
         this.template( '_gulpfile.js', 'gulpfile.js' );
         this.template( '_gitignore', '.gitignore' );
-        this.directory('sass','sass');
+        this.directory( 'sass', 'sass' );
         this.copy( 'bowerrc', '.bowerrc' );
         this.copy( 'jsconfig.json' );
     },

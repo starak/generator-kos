@@ -1,6 +1,8 @@
 # generator-ko
 
-Generates a starting point for a Knockout application with Skeleton CSS.
+Generates a starting point for a Knockout application with ES6 (ES2015) via Babel and Skeleton Sass.
+
+This generator is based on [Steve Sandersons generator](https://github.com/SteveSanderson/generator-ko).
 
 ## Install
 

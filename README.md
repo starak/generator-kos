@@ -1,4 +1,4 @@
-# generator-ko
+# generator-kos
 
 Generates a starting point for a Knockout application with ES6 (ES2015) via Babel and Skeleton Sass.
 
